@@ -10,19 +10,41 @@ const D_DAY_CALCULATOR_TEXT = "디데이 계산기";
 
 const inter = Inter({ subsets: ["latin"] });
 const today = new Intl.DateTimeFormat("ko", { dateStyle: "full" });
+const placeholder = dayjs(new Date()).format("YYYY/MM/DD").replaceAll("/", "");
 
 const HomeComponent = () => {
-  const [fromNowOnDate, setFromNowOnDate] = useState("");
+  const [fromNowOnDays, setFromNowOnDays] = useState("");
+  const [referenceDate, setReferenceDate] = useState(0);
+  const [fromReferenceDateOnDays, setFromReferenceDateOnDays] = useState("");
 
-  const onChangeFromNowOnDate = useCallback(
+  const onChangeFromNowOnDays = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setFromNowOnDate(e.currentTarget.value);
+      setFromNowOnDays(e.currentTarget.value);
+    },
+    []
+  );
+
+  const onChangeReferenceDate = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const numerableDate = parseInt(e.currentTarget.value, 10);
+      if (!Number.isNaN(numerableDate)) {
+        setReferenceDate(numerableDate);
+      } else {
+        setReferenceDate(0);
+      }
+    },
+    []
+  );
+
+  const onChangeFromReferenceDateOnDays = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setFromReferenceDateOnDays(e.currentTarget.value);
     },
     []
   );
 
   const targetDate = useMemo(() => {
-    const numerable = parseInt(fromNowOnDate, 10);
+    const numerable = parseInt(fromNowOnDays, 10);
     if (!Number.isNaN(numerable)) {
       return dayjs(new Date())
         .add(numerable, "days")
@@ -33,7 +55,21 @@ const HomeComponent = () => {
     }
 
     return "";
-  }, [fromNowOnDate]);
+  }, [fromNowOnDays]);
+
+  const targetReferenceDate = useMemo(() => {
+    const numerable = parseInt(fromReferenceDateOnDays, 10);
+    if (!Number.isNaN(numerable)) {
+      return dayjs(new Date())
+        .add(numerable, "days")
+        .format("YYYY. MM. DD.")
+        .replace(".", "년")
+        .replace(".", "월")
+        .replace(".", "일");
+    }
+
+    return "";
+  }, [fromReferenceDateOnDays]);
 
   console.log("targetDate", targetDate);
 
@@ -59,12 +95,12 @@ const HomeComponent = () => {
           <BFlex alignItems="center" gap={8}>
             <BTypography text={"오늘로부터"} size={20} color="mono08" isBold />
             <BTextInput
-              textInputSizeType={"lg"}
-              value={fromNowOnDate}
-              onChange={onChangeFromNowOnDate}
+              textInputSizeType={"md"}
+              value={fromNowOnDays}
+              onChange={onChangeFromNowOnDays}
               type={"text"}
               width={240}
-              placeholder={"예: "}
+              placeholder={placeholder}
               isFullTextInputWidth
             />
             <BTypography
@@ -79,22 +115,22 @@ const HomeComponent = () => {
           <BFlex alignItems="center" gap={8}>
             <BTypography text={"기준일"} size={20} color="mono08" isBold />
             <BTextInput
-              textInputSizeType={"lg"}
-              value={fromNowOnDate}
-              onChange={onChangeFromNowOnDate}
-              type={"text"}
+              textInputSizeType={"md"}
+              value={referenceDate || ""}
+              onChange={onChangeReferenceDate}
+              type={"number"}
               width={240}
-              placeholder={"예: "}
+              placeholder={placeholder}
               isFullTextInputWidth
             />
             <BTypography text={"로 부터"} size={20} color="mono08" isBold />
             <BTextInput
-              textInputSizeType={"lg"}
-              value={fromNowOnDate}
-              onChange={onChangeFromNowOnDate}
+              textInputSizeType={"md"}
+              value={fromReferenceDateOnDays}
+              onChange={onChangeFromReferenceDateOnDays}
               type={"text"}
               width={240}
-              placeholder={"예: "}
+              placeholder={placeholder}
               isFullTextInputWidth
             />
             <BTypography
@@ -103,7 +139,12 @@ const HomeComponent = () => {
               color="mono08"
               isBold
             />
-            <BTypography text={targetDate} size={20} color="mono08" isBold />
+            <BTypography
+              text={targetReferenceDate}
+              size={20}
+              color="mono08"
+              isBold
+            />
           </BFlex>
         </BFlex>
       </ContentComponent>
