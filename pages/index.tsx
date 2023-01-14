@@ -1,10 +1,14 @@
 // import Image from "next/image";
 // import styles from "styles/Home.module.css";
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import HomeComponent from "components/pages/Home";
+import dayjs from "dayjs";
 
-const inter = Inter({ subsets: ["latin"] });
+import isLeapYear from "dayjs/plugin/isLeapYear"; // import plugin
+import "dayjs/locale/ko"; // import locale
+
+dayjs.extend(isLeapYear); // use plugin
+dayjs.locale("ko"); // use locale
 
 export default function Home() {
   return (
