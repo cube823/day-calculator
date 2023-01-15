@@ -3,6 +3,7 @@ import BFlex from "components/ui/atoms/BFlex";
 import BTextInput from "components/ui/atoms/BTextInput";
 import BTypography from "components/ui/atoms/BTypography";
 import dayjs from "dayjs";
+import moment from "moment";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 
@@ -10,7 +11,10 @@ const D_DAY_CALCULATOR_TEXT = "디데이 계산기";
 
 const inter = Inter({ subsets: ["latin"] });
 const today = new Intl.DateTimeFormat("ko", { dateStyle: "full" });
-const placeholder = dayjs(new Date()).format("YYYY/MM/DD").replaceAll("/", "");
+const daysPlaceholder = "100";
+const datePlaceholder = dayjs(new Date())
+  .format("YYYY/MM/DD")
+  .replaceAll("/", "");
 
 const HomeComponent = () => {
   const [fromNowOnDays, setFromNowOnDays] = useState("");
@@ -100,7 +104,7 @@ const HomeComponent = () => {
               onChange={onChangeFromNowOnDays}
               type={"text"}
               width={240}
-              placeholder={placeholder}
+              placeholder={daysPlaceholder}
               isFullTextInputWidth
             />
             <BTypography
@@ -113,24 +117,36 @@ const HomeComponent = () => {
           </BFlex>
 
           <BFlex alignItems="center" gap={8}>
-            <BTypography text={"기준일"} size={20} color="mono08" isBold />
+            <BTypography
+              text={"기준일"}
+              size={20}
+              color="mono08"
+              isBold
+              justNoWrap
+            />
             <BTextInput
               textInputSizeType={"md"}
               value={referenceDate || ""}
               onChange={onChangeReferenceDate}
               type={"number"}
               width={240}
-              placeholder={placeholder}
+              placeholder={datePlaceholder}
               isFullTextInputWidth
             />
-            <BTypography text={"로 부터"} size={20} color="mono08" isBold />
+            <BTypography
+              text={"로 부터"}
+              size={20}
+              color="mono08"
+              isBold
+              justNoWrap
+            />
             <BTextInput
               textInputSizeType={"md"}
               value={fromReferenceDateOnDays}
               onChange={onChangeFromReferenceDateOnDays}
               type={"text"}
               width={240}
-              placeholder={placeholder}
+              placeholder={daysPlaceholder}
               isFullTextInputWidth
             />
             <BTypography
@@ -138,9 +154,11 @@ const HomeComponent = () => {
               size={20}
               color="mono08"
               isBold
+              justNoWrap
             />
             <BTypography
               text={targetReferenceDate}
+              justNoWrap
               size={20}
               color="mono08"
               isBold
@@ -160,6 +178,10 @@ const MainContainer = styled.main`
   align-items: center;
 
   background-color: var(--background-start-rgb);
+
+  @media (max-width: 960px) {
+    align-items: flex-start;
+  }
 `;
 
 const HeaderComponent = styled.header`
@@ -174,9 +196,10 @@ const HeaderComponent = styled.header`
 const ContentComponent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 960px;
+  // width: 960px;
   flex-wrap: wrap;
   min-height: calc(100vh - 3rem);
+  align-items: center;
   gap: 1rem;
 `;
 
