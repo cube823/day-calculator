@@ -17,13 +17,18 @@ const datePlaceholder = dayjs(new Date())
   .replaceAll("/", "");
 
 const HomeComponent = () => {
-  const [fromNowOnDays, setFromNowOnDays] = useState("");
+  const [fromNowOnDays, setFromNowOnDays] = useState(100);
   const [referenceDate, setReferenceDate] = useState(0);
-  const [fromReferenceDateOnDays, setFromReferenceDateOnDays] = useState("");
+  const [fromReferenceDateOnDays, setFromReferenceDateOnDays] = useState(100);
 
   const onChangeFromNowOnDays = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setFromNowOnDays(e.currentTarget.value);
+      const numerableDate = parseInt(e.currentTarget.value, 10);
+      if (!Number.isNaN(numerableDate)) {
+        setFromNowOnDays(numerableDate);
+      } else {
+        setFromNowOnDays(0);
+      }
     },
     []
   );
@@ -42,16 +47,20 @@ const HomeComponent = () => {
 
   const onChangeFromReferenceDateOnDays = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setFromReferenceDateOnDays(e.currentTarget.value);
+      const numerableDate = parseInt(e.currentTarget.value, 10);
+      if (!Number.isNaN(numerableDate)) {
+        setFromReferenceDateOnDays(numerableDate);
+      } else {
+        setFromReferenceDateOnDays(0);
+      }
     },
     []
   );
 
   const targetDate = useMemo(() => {
-    const numerable = parseInt(fromNowOnDays, 10);
-    if (!Number.isNaN(numerable)) {
+    if (!Number.isNaN(fromNowOnDays)) {
       return dayjs(new Date())
-        .add(numerable, "days")
+        .add(fromNowOnDays, "days")
         .format("YYYY. MM. DD.")
         .replace(".", "년")
         .replace(".", "월")
@@ -62,10 +71,9 @@ const HomeComponent = () => {
   }, [fromNowOnDays]);
 
   const targetReferenceDate = useMemo(() => {
-    const numerable = parseInt(fromReferenceDateOnDays, 10);
-    if (!Number.isNaN(numerable)) {
+    if (!Number.isNaN(fromReferenceDateOnDays)) {
       return dayjs(new Date())
-        .add(numerable, "days")
+        .add(fromReferenceDateOnDays, "days")
         .format("YYYY. MM. DD.")
         .replace(".", "년")
         .replace(".", "월")
@@ -126,9 +134,13 @@ const HomeComponent = () => {
             />
             <BTextInput
               textInputSizeType={"md"}
-              value={referenceDate || ""}
+              value={
+                referenceDate > 10_000_000
+                  ? dayjs(`${referenceDate}`).format("YYYY. MM. DD")
+                  : referenceDate || ""
+              }
               onChange={onChangeReferenceDate}
-              type={"number"}
+              type={"text"}
               width={240}
               placeholder={datePlaceholder}
               isFullTextInputWidth
