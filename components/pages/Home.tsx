@@ -3,7 +3,6 @@ import BFlex from "components/ui/atoms/BFlex";
 import BTextInput from "components/ui/atoms/BTextInput";
 import BTypography from "components/ui/atoms/BTypography";
 import dayjs from "dayjs";
-import moment from "moment";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 
