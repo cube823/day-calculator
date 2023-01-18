@@ -1,6 +1,7 @@
 import { Inter } from "@next/font/google";
+import ReferenceDate from "components/pages/Home/ReferenceDate";
+import Today from "components/pages/Home/Today";
 import BFlex from "components/ui/atoms/BFlex";
-import BTextInput from "components/ui/atoms/BTextInput";
 import BTypography from "components/ui/atoms/BTypography";
 import dayjs from "dayjs";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
@@ -82,8 +83,6 @@ const HomeComponent = () => {
     return "";
   }, [fromReferenceDateOnDays]);
 
-  console.log("targetDate", targetDate);
-
   return (
     <MainContainer className={inter.className}>
       <HeaderComponent>
@@ -103,78 +102,22 @@ const HomeComponent = () => {
         />
 
         <BFlex isColumn>
-          <BFlex alignItems="center" gap={8}>
-            <BTypography text={"오늘로부터"} size={20} color="mono08" isBold />
-            <BTextInput
-              textInputSizeType={"md"}
-              value={fromNowOnDays}
-              onChange={onChangeFromNowOnDays}
-              type={"text"}
-              width={240}
-              placeholder={daysPlaceholder}
-              isFullTextInputWidth
-            />
-            <BTypography
-              text={"일 째 되는 날은?"}
-              size={20}
-              color="mono08"
-              isBold
-            />
-            <BTypography text={targetDate} size={20} color="mono08" isBold />
-          </BFlex>
+          <Today
+            fromNowOnDays={fromNowOnDays}
+            onChangeFromNowOnDays={onChangeFromNowOnDays}
+            daysPlaceholder={daysPlaceholder}
+            targetDate={targetDate}
+          />
 
-          <BFlex alignItems="center" gap={8}>
-            <BTypography
-              text={"기준일"}
-              size={20}
-              color="mono08"
-              isBold
-              justNoWrap
-            />
-            <BTextInput
-              textInputSizeType={"md"}
-              value={
-                referenceDate > 10_000_000
-                  ? dayjs(`${referenceDate}`).format("YYYY. MM. DD")
-                  : referenceDate || ""
-              }
-              onChange={onChangeReferenceDate}
-              type={"text"}
-              width={240}
-              placeholder={datePlaceholder}
-              isFullTextInputWidth
-            />
-            <BTypography
-              text={"로 부터"}
-              size={20}
-              color="mono08"
-              isBold
-              justNoWrap
-            />
-            <BTextInput
-              textInputSizeType={"md"}
-              value={fromReferenceDateOnDays}
-              onChange={onChangeFromReferenceDateOnDays}
-              type={"text"}
-              width={240}
-              placeholder={daysPlaceholder}
-              isFullTextInputWidth
-            />
-            <BTypography
-              text={"일 째 되는 날은?"}
-              size={20}
-              color="mono08"
-              isBold
-              justNoWrap
-            />
-            <BTypography
-              text={targetReferenceDate}
-              justNoWrap
-              size={20}
-              color="mono08"
-              isBold
-            />
-          </BFlex>
+          <ReferenceDate
+            referenceDate={referenceDate}
+            onChangeReferenceDate={onChangeReferenceDate}
+            fromReferenceDateOnDays={fromReferenceDateOnDays}
+            onChangeFromReferenceDateOnDays={onChangeFromReferenceDateOnDays}
+            targetReferenceDate={targetReferenceDate}
+            daysPlaceholder={daysPlaceholder}
+            datePlaceholder={datePlaceholder}
+          />
         </BFlex>
       </ContentComponent>
     </MainContainer>
