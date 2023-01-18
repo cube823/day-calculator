@@ -204,7 +204,7 @@ const HeaderComponent = styled.header`
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
 `;
 
-const ContentComponent = styled.div`
+const ContentComponent = styled.section`
   display: flex;
   flex-direction: column;
   // width: 960px;
