@@ -120,6 +120,7 @@ const HomeComponent = () => {
           />
         </BFlex>
       </ContentComponent>
+      <FooterComponent></FooterComponent>
     </MainContainer>
   );
 };
@@ -155,6 +156,10 @@ const ContentComponent = styled.section`
   min-height: calc(100vh - 3rem);
   align-items: center;
   gap: 1rem;
+`;
+
+const FooterComponent = styled.footer`
+  display: flex;
 `;
 
 export default HomeComponent;
