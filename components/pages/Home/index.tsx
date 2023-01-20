@@ -120,7 +120,9 @@ const HomeComponent = () => {
           />
         </BFlex>
       </ContentComponent>
-      <FooterComponent></FooterComponent>
+      <FooterComponent>
+        <BTypography text="copyright to minky yoon" size={16} color="mono08" />
+      </FooterComponent>
     </MainContainer>
   );
 };
@@ -153,13 +155,14 @@ const ContentComponent = styled.section`
   flex-direction: column;
   // width: 960px;
   flex-wrap: wrap;
-  min-height: calc(100vh - 3rem);
+  min-height: calc(100vh - 5rem);
   align-items: center;
   gap: 1rem;
 `;
 
 const FooterComponent = styled.footer`
   display: flex;
+  height: 2rem;
 `;
 
 export default HomeComponent;
