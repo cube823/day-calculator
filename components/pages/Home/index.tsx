@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 
+// TODO: 고ㅇ휴일 api 가져오기 추가하기
+
 const D_DAY_CALCULATOR_TEXT = "디데이 계산기";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -101,7 +103,7 @@ const HomeComponent = () => {
           size={20}
         />
 
-        <BFlex isColumn>
+        <BFlex isColumn gap={8}>
           <Today
             fromNowOnDays={fromNowOnDays}
             onChangeFromNowOnDays={onChangeFromNowOnDays}

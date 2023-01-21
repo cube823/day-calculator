@@ -3,6 +3,7 @@ import BTextInput from "components/ui/atoms/BTextInput";
 import BTypography from "components/ui/atoms/BTypography";
 import dayjs from "dayjs";
 import { ChangeEvent } from "react";
+import styled from "styled-components";
 
 interface ReferenceDateProps {
   referenceDate: number;
@@ -24,7 +25,7 @@ const ReferenceDate = ({
   datePlaceholder,
 }: ReferenceDateProps) => {
   return (
-    <BFlex alignItems="center" gap={8}>
+    <ReferenceContainer>
       <BTypography text={"기준일"} size={20} color="mono08" isBold justNoWrap />
       <BTextInput
         textInputSizeType={"md"}
@@ -69,8 +70,17 @@ const ReferenceDate = ({
         color="mono08"
         isBold
       />
-    </BFlex>
+    </ReferenceContainer>
   );
 };
+
+const ReferenceContainer = styled.div`
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`;
 
 export default ReferenceDate;
