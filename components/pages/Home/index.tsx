@@ -123,7 +123,13 @@ const HomeComponent = () => {
         </BFlex>
       </ContentComponent>
       <FooterComponent>
-        <BTypography text="copyright to minky yoon" size={16} color="mono08" />
+        <address>
+          <BTypography
+            text="copyright to minky yoon"
+            size={16}
+            color="mono08"
+          />
+        </address>
       </FooterComponent>
     </MainContainer>
   );
@@ -138,9 +144,9 @@ const MainContainer = styled.main`
 
   background-color: var(--background-start-rgb);
 
-  @media (max-width: 960px) {
-    align-items: flex-start;
-  }
+  // @media (max-width: 960px) {
+  //   align-items: flex-start;
+  // }
 `;
 
 const HeaderComponent = styled.header`
