@@ -1,6 +1,7 @@
 import { Inter } from "@next/font/google";
 import ReferenceDate from "components/pages/Home/ReferenceDate";
 import Today from "components/pages/Home/Today";
+import { BColor } from "components/ui/atoms/BColor";
 import BFlex from "components/ui/atoms/BFlex";
 import BTypography from "components/ui/atoms/BTypography";
 import dayjs from "dayjs";
@@ -142,7 +143,7 @@ const MainContainer = styled.main`
   flex-direction: column;
   align-items: center;
 
-  background-color: var(--background-start-rgb);
+  background-color: ${BColor.mono01};
 
   // @media (max-width: 960px) {
   //   align-items: flex-start;
@@ -156,6 +157,7 @@ const HeaderComponent = styled.header`
   align-items: center;
   justify-content: center;
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: ${BColor.mono02};
 `;
 
 const ContentComponent = styled.section`

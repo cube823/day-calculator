@@ -36,6 +36,7 @@ const Today = ({
 };
 
 const TodayContainer = styled.div`
+  display: flex;
   align-items: center;
   gap: 1rem;
 
