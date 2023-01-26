@@ -1,4 +1,5 @@
 import { Inter } from "@next/font/google";
+import DateMinusDate from "components/pages/Home/DateMinusDate";
 import ReferenceDate from "components/pages/Home/ReferenceDate";
 import Today from "components/pages/Home/Today";
 import { BColor } from "components/ui/atoms/BColor";
@@ -121,6 +122,7 @@ const HomeComponent = () => {
             daysPlaceholder={daysPlaceholder}
             datePlaceholder={datePlaceholder}
           />
+          <DateMinusDate />
         </BFlex>
       </ContentComponent>
       <FooterComponent>
