@@ -2,13 +2,6 @@
 // import styles from "styles/Home.module.css";
 import Head from "next/head";
 import HomeComponent from "components/pages/Home";
-import dayjs from "dayjs";
-
-import isLeapYear from "dayjs/plugin/isLeapYear"; // import plugin
-import "dayjs/locale/ko"; // import locale
-
-dayjs.extend(isLeapYear); // use plugin
-dayjs.locale("ko"); // use locale
 
 export default function Home() {
   return (

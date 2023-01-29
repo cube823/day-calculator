@@ -9,9 +9,18 @@ import dayjs from "dayjs";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 
+import isLeapYear from "dayjs/plugin/isLeapYear"; // import plugin
+
 // TODO: 고ㅇ휴일 api 가져오기 추가하기
 
 const D_DAY_CALCULATOR_TEXT = "디데이 계산기";
+const UNTIL_TODAY_DAYS_COUNT = dayjs().diff(
+  `${dayjs().year() - 1}-12-31`,
+  "days"
+);
+
+const ALL_DAYS_COUNT = dayjs().isLeapYear() ? 366 : 365;
+console.log(UNTIL_TODAY_DAYS_COUNT);
 
 const inter = Inter({ subsets: ["latin"] });
 const today = new Intl.DateTimeFormat("ko", { dateStyle: "full" });
@@ -101,6 +110,15 @@ const HomeComponent = () => {
       <ContentComponent>
         <BTypography
           text={`오늘은 ${today.format()} 입니다.`}
+          color="mono08"
+          size={20}
+        />
+
+        <BTypography
+          text={`${dayjs().year()}년은 ${(
+            (UNTIL_TODAY_DAYS_COUNT / ALL_DAYS_COUNT) *
+            100
+          ).toFixed(2)}% 지났습니다.`}
           color="mono08"
           size={20}
         />
